@@ -55,6 +55,7 @@ import './index.css';
 const profileImage = '/Untitled_Project__10_-removebg-preview.png';
 
 const Portfolio = () => {
+  // Set dark mode to true by default
   const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -74,9 +75,10 @@ const Portfolio = () => {
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') === 'true' || 
-                  (window.matchMedia('(prefers-color-scheme: dark)').matches && 
-                   localStorage.getItem('darkMode') !== 'false');
+    // Check localStorage first, default to dark mode if no preference saved
+    const savedTheme = localStorage.getItem('darkMode');
+    const isDark = savedTheme !== null ? savedTheme === 'true' : true;
+    
     setDarkMode(isDark);
     document.documentElement.className = isDark ? 'dark' : 'light';
     
