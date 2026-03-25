@@ -51,11 +51,7 @@ import {
 
 import './index.css';
 
-// Profile image from public folder
-const profileImage = '/Untitled_Project__10_-removebg-preview.png';
-
 const Portfolio = () => {
-  // Set dark mode to true by default
   const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -68,17 +64,15 @@ const Portfolio = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
-  const [imageError, setImageError] = useState(false);
   
   const controls = useAnimation();
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   useEffect(() => {
-    // Check localStorage first, default to dark mode if no preference saved
-    const savedTheme = localStorage.getItem('darkMode');
-    const isDark = savedTheme !== null ? savedTheme === 'true' : true;
-    
+    const isDark = localStorage.getItem('darkMode') === 'true' || 
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches && 
+                   localStorage.getItem('darkMode') !== 'false');
     setDarkMode(isDark);
     document.documentElement.className = isDark ? 'dark' : 'light';
     
@@ -153,7 +147,7 @@ const Portfolio = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -209,7 +203,7 @@ const Portfolio = () => {
       category: "Frontend Project",
       description: "Frontend AI-powered agricultural web application predicting crop yields using environmental parameters with real-time analytics",
       tech: ["React", "Vite", "GitHub", "JavaScript", "Chart.js", "CSS", "Netlify"],
-      icon: <Layers />,
+      icon: <BarChart3 />,
       color: "emerald-cyan",
       githubLink: "https://github.com/monishr288/CROPS-YIELD-PREDICTION",
       liveLink: "https://cyp-crop-yield-predictor.netlify.app/",
@@ -222,41 +216,64 @@ const Portfolio = () => {
       tech: ["React", "Node.js", "Express.js", "Framer Motion", "Tailwind", "REST APIs", "CSS"],
       icon: <Code />,
       color: "purple-pink",
-      githubLink: "https://github.com/monishr288/portfolio",
-      liveLink: "https://monish-portfolio.vercel.app/"
+      githubLink:"https://github.com/monishr288/combined",
+      liveLink:"https://my-portfolio-khaki-five-61.vercel.app/",
+      details:"Portfolio website showcasing full-stack capabilities with React and Node.js",
+
+    },
+    {
+      title: "DESIGN-AGENCY Next.js",
+      category: "Full Stack Framework",
+      description: "A cutting-edge design agency website built with Next.js 14, featuring interactive UI components, dark/light mode, smooth animations with Framer Motion, and integrated contact form using EmailJS.",
+      tech: ["React 18", "Next.js 14", "Tailwind CSS", "Typescript", "GitHub", "JavaScript", "EmailJS", "Lenis", "npm", "Lucide React", "Git", "CSS", "Vercel", "Framer Motion"],
+      icon: <Shield />,
+      color: "techy",
+      githubLink: "https://github.com/monishr288/design-agency-nextjs",
+      liveLink: "https://design-agency-nextjs-eight.vercel.app/",
+      details: "A modern, responsive design agency portfolio built with Next.js 14"
+    },
+    {
+      title: "DESIGN-AGENCY HOMEPAGE",
+      category: "Frontend Project",
+      description: "A modern, fully responsive Design Agency website built with React, showcasing a clean and professional UI with interactive components and seamless user experience.",
+      tech: ["React", "Vite", "GitHub", "JavaScript", "EmailJS", "Context API", "npm", "Lucide React", "Git", "CSS", "Vercel"],
+      icon: <Layers />,
+      color: "play",
+      githubLink: "https://github.com/monishr288/design-agency",
+      liveLink: "https://design-agency-homepage-neon.vercel.app/",
+      details: "A modern React-based Design Agency homepage featuring dark/light mode"
     },
     {
       title: "MindEase-AI Companion for Reducing Loneliness",
       category: "Frontend Project",
-      description: "AI-powered emotional support companion using Gemini API for reducing loneliness and providing mental health assistance",
-      tech: ["React", "Vite", "GitHub", "JavaScript", "Gemini API", "CSS", "Vercel"],
-      icon: <BarChart3 />,
-      color: "emerald-cyan",
+      description: "AI-powered emotional support web application using Gemini API to provide compassionate conversations and reduce loneliness",
+      tech: ["React", "Vite", "GitHub", "JavaScript", "Gemini API Key", "CSS", "Vercel"],
+      icon: <Zap />,
+      color: "health",
       githubLink: "https://github.com/monishr288/emosup/tree/main/mindease-chat",
       liveLink: "https://mindease-ai-companion.vercel.app/",
-      details: "AI companion chatbot to reduce loneliness"
+      details: "AI companion for emotional wellbeing"
     },
     {
       title: "Flower Shop E-Commerce",
       category: "Frontend Project",
-      description: "Modern responsive e-commerce website for flower shop with beautiful UI and smooth animations",
+      description: "Beautiful flower shop e-commerce website with responsive design and smooth user experience",
       tech: ["HTML", "CSS", "GitHub", "JavaScript"],
       icon: <Heart />,
       color: "rose-orange",
       githubLink: "https://github.com/monishr288/Flower-Shopping-Website",
       liveLink: "https://monishr288.github.io/Flower-Shopping-Website/",
-      details: "E-commerce flower shop website"
+      details: "E-commerce flower shop"
     },
     {
       title: "Supermarket App UI Design",
       category: "UI/UX Design",
       description: "Designed a supermarket web and mobile application UI using Figma, focusing on usability and user experience.",
-      tech: ["Figma", "UI/UX", "Prototyping", "Wireframing"],
+      tech: ["Figma"],
       icon: <Figma />,
-      color: "purple-pink",
-      githubLink: "https://www.figma.com/design/your-design-link",
-      liveLink: "https://www.figma.com/proto/your-prototype-link",
-      details: "Complete supermarket app design system"
+      color: "luxe",
+      liveLink: "https://www.figma.com/proto/pWKpDNeb47q5uoXaOxfzPq/Ecommerce-App?node-id=1-6",
+      details: "UI/UX design project"
     },
   ];
 
@@ -281,9 +298,9 @@ const Portfolio = () => {
 
   const skills = {
     frontend: ["React.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "Tailwind", "Framer Motion"],
-    backend: ["Node.js", "Express.js", "Python", "REST APIs", "MongoDB", "PostgreSQL", "Firebase"],
+    backend: ["Node.js", "Express.js", "Next.js", "Python", "Java", "REST APIs"],
     design: ["Figma", "UI/UX Design", "Prototyping", "Wireframing", "Design Systems"],
-    tools: ["Git", "VS Code", "Vite", "Chart.js", "Three.js", "Docker", "AWS"]
+    tools: ["Git", "Vercel", "VS Code", "Vite", "Chart.js", "GitHub", "Netlify"]
   };
 
   const stats = [
@@ -304,13 +321,11 @@ const Portfolio = () => {
 
   return (
     <div className={`portfolio ${darkMode ? 'dark' : 'light'}`}>
-      {/* Progress Bar */}
       <motion.div 
         className="progress-bar" 
         style={{ scaleX }}
       />
 
-      {/* Navigation */}
       <nav className="nav">
         <div className="nav-container">
           <motion.div 
@@ -324,7 +339,6 @@ const Portfolio = () => {
             <span className="brand-text">Monish R</span>
           </motion.div>
 
-          {/* Desktop Navigation */}
           <div className="nav-menu-desktop">
             {navItems.map((item) => (
               <button
@@ -340,7 +354,6 @@ const Portfolio = () => {
               </button>
             ))}
             
-            {/* Theme Toggle */}
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -360,7 +373,6 @@ const Portfolio = () => {
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="nav-menu-mobile">
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -380,7 +392,6 @@ const Portfolio = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <motion.div 
           className={`mobile-menu ${menuOpen ? 'open' : ''}`}
           initial={false}
@@ -402,11 +413,9 @@ const Portfolio = () => {
         </motion.div>
       </nav>
 
-      {/* Hero Section */}
       <section id="home" className="hero">
         <div className="container">
           <div className="hero-grid">
-            {/* Left Content */}
             <motion.div
               className="hero-content"
               initial={{ opacity: 0, x: -50 }}
@@ -424,7 +433,7 @@ const Portfolio = () => {
               </motion.div>
               
               <h1 className="hero-title">
-                Hi, I'm <span className="text-gradient">Monish</span>
+                Hi, I'm <span className="text-gradient">Monish R</span>
               </h1>
               
               <p className="hero-subtitle">
@@ -434,8 +443,8 @@ const Portfolio = () => {
               
               <div className="hero-actions">
                 <motion.a
-                  href="MONISH R res.pdf"
-                  download
+                  href="/MONISH R res.pdf"
+                  download="Monish_R_Resume.pdf"
                   className="btn btn-primary"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -479,7 +488,6 @@ const Portfolio = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right Photo - Updated with fixed image path */}
             <motion.div
               className="hero-photo"
               initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
@@ -487,20 +495,15 @@ const Portfolio = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <div className="photo-frame">
-                {!imageError ? (
-                  <img 
-                    src={profileImage}
-                    alt="Monish R - Full Stack Developer"
-                    className="profile-image"
-                    onError={() => setImageError(true)}
-                  />
-                ) : (
-                  <div className="profile-fallback">
-                    <Code size={80} />
-                    <span>Monish R</span>
-                  </div>
-                )}
-                {/* Floating Elements */}
+                <img 
+                  src="/Untitled_Project__10_-removebg-preview.png"
+                  alt="Monish R - Full Stack Developer"
+                  className="profile-image"
+                  onError={(e) => {
+                    console.error("Image failed to load:", e);
+                    e.target.src = "/Monish.png";
+                  }}
+                />
                 <motion.div 
                   className="floating-icon icon-1"
                   animate={{ 
@@ -537,7 +540,6 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about" className="section about">
         <div className="container">
           <motion.div
@@ -587,7 +589,6 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projects" className="section projects">
         <div className="container">
           <motion.div
@@ -635,10 +636,11 @@ const Portfolio = () => {
                       <motion.a
                         href={project.githubLink}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="btn-project btn-github"
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
+                        aria-label={`View ${project.title} on GitHub`}
                       >
                         <Github size={18} />
                         <span>GitHub</span>
@@ -649,10 +651,11 @@ const Portfolio = () => {
                       <motion.a
                         href={project.liveLink}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="btn-project btn-live-demo"
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
+                        aria-label={`View ${project.title} live demo`}
                       >
                         <ExternalLink size={18} />
                         <span>Live Demo</span>
@@ -668,11 +671,10 @@ const Portfolio = () => {
 Project: ${project.title}
 Category: ${project.category}
 Description: ${project.description}
-${project.githubLink ? `GitHub: ${project.githubLink}` : ''}
-${project.liveLink ? `Live Demo: ${project.liveLink}` : ''}
 Technologies: ${project.tech.join(', ')}
                         `);
                       }}
+                      aria-label={`View details for ${project.title}`}
                     >
                       <span>Details</span>
                     </motion.button>
@@ -684,7 +686,6 @@ Technologies: ${project.tech.join(', ')}
         </div>
       </section>
 
-      {/* Experience Section */}
       <section id="experience" className="section experience">
         <div className="container">
           <motion.div
@@ -726,7 +727,6 @@ Technologies: ${project.tech.join(', ')}
         </div>
       </section>
 
-      {/* Skills Section */}
       <section id="skills" className="section skills">
         <div className="container">
           <motion.div
@@ -831,7 +831,6 @@ Technologies: ${project.tech.join(', ')}
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="section contact">
         <div className="container">
           <motion.div
@@ -844,7 +843,6 @@ Technologies: ${project.tech.join(', ')}
             <p className="section-subtitle">Let's build something amazing together</p>
           </motion.div>
 
-          {/* Status Message */}
           {submitStatus.message && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -1005,7 +1003,6 @@ Technologies: ${project.tech.join(', ')}
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
@@ -1057,7 +1054,7 @@ Technologies: ${project.tech.join(', ')}
             </div>
 
             <div className="footer-bottom">
-              <p>© {new Date().getFullYear()} Monish R. Built with React & Framer Motion.</p>
+              <p>© {new Date().getFullYear()} Monish R. All rights reserved. Made with ❤️.</p>
             </div>
           </div>
         </div>

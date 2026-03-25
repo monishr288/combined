@@ -888,7 +888,22 @@ body {
   background: linear-gradient(135deg, #3b82f6, #06b6d4);
 }
 .project-icon.rose-orange{
-  background: linear-gradient( #8b5cf6, #ec4899 ); 
+  background: linear-gradient( #FF10F0,#9B30FF) ; 
+}
+.project-icon.health{
+  background: linear-gradient(#0A1929, #14B8A6 ); 
+}
+.project-icon.play{
+  background: linear-gradient(#6C28D9, #FFE629); 
+}
+.project-icon.techy{
+  background: linear-gradient(#2D1B4A, #00E5FF); 
+}
+.project-icon.soft{
+  background: linear-gradient(#FFB8B8, #E63946); 
+}
+.project-icon.luxe{
+  background: linear-gradient(#A259FF, #FF7262); 
 }
 
 .project-category {
