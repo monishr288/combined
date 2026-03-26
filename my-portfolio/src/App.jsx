@@ -52,6 +52,7 @@ import {
 import './index.css';
 
 const Portfolio = () => {
+  // Set dark mode to true by default
   const [darkMode, setDarkMode] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -70,11 +71,19 @@ const Portfolio = () => {
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   useEffect(() => {
-    const isDark = localStorage.getItem('darkMode') === 'true' || 
-                  (window.matchMedia('(prefers-color-scheme: dark)').matches && 
-                   localStorage.getItem('darkMode') !== 'false');
-    setDarkMode(isDark);
-    document.documentElement.className = isDark ? 'dark' : 'light';
+    // Check if user has previously set a preference, otherwise default to dark mode
+    const savedDarkMode = localStorage.getItem('darkMode');
+    
+    if (savedDarkMode !== null) {
+      // Use saved preference if exists
+      setDarkMode(savedDarkMode === 'true');
+      document.documentElement.className = savedDarkMode === 'true' ? 'dark' : 'light';
+    } else {
+      // Default to dark mode
+      setDarkMode(true);
+      document.documentElement.className = 'dark';
+      localStorage.setItem('darkMode', 'true');
+    }
     
     controls.start({
       opacity: 1,
