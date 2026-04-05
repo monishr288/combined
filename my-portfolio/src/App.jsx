@@ -226,7 +226,7 @@ const Portfolio = () => {
       icon: <Code />,
       color: "purple-pink",
       githubLink:"https://github.com/monishr288/combined",
-      liveLink:"https://my-portfolio-khaki-five-61.vercel.app/",
+      liveLink:"https://rmonish.vercel.app/",
       details:"Portfolio website showcasing full-stack capabilities with React and Node.js",
 
     },
